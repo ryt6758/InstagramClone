@@ -1,1 +1,17 @@
 <h1>新規登録 - newUser</h1>
+
+<%= flash[:sucsess] %>
+<%= @user.id %>
+
+<%= users_new_url %>
+
+
+<%= form_with model: @user, url: users_create_url, local: true  do |form| %>
+  <%= form.label :email %><br>
+  <%= form.email_field :email %><br>
+  <%= form.label :password %><br>
+  <%= form.password_field :password %><br>
+  <%= form.label :name %><br>
+  <%= form.text_field :name %><br>
+  <%= form.submit %>
+<% end %>
