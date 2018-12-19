@@ -1,8 +1,10 @@
+<% if flash[:sucsess] %>
+  <%= flash[:sucsess] %>
+<% end %>
+
 <% @posts.each do |post| %>
-  <p>
-  	<%= post.content %> / <%= post.created_at %>
-	  <% if post.image.attached? %>
-	  	<span><%= link_to("画像", "/posts/#{post.id}") %></span>
-	  <% end %>
-  </p>
+  <% if post.image.attached? %>
+	<%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
+  <% end %>
+  <p><%= post.content %> - <%= post.created_at %></p>
 <% end %>

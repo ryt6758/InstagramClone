@@ -1,10 +1,8 @@
 <h1>新規登録 - newUser</h1>
 
-<%= flash[:sucsess] %>
-<%= @user.id %>
-
-<%= users_new_url %>
-
+<%if flash[:sucsess] %>
+  <%= flash[:sucsess] %>
+<% end %>
 
 <%= form_with model: @user, url: users_create_url, local: true  do |form| %>
   <%= form.label :email %><br>
