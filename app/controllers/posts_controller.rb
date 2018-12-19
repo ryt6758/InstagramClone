@@ -24,11 +24,7 @@ class PostsController < ApplicationController
 	end
 
 	def login_check
-		if session[:user_id]
-			@current_user = session[:user_id]
-		else
-			redirect_to "/users/new"
-		end
+		redirect_to "/login_form" unless @current_user
 	end
 
 end

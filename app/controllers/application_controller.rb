@@ -1,11 +1,9 @@
 class ApplicationController < ActionController::Base
 	
-	# def login_check
-	# 	if session[:user_id]
-	# 		@current_user = session[:user_id]
-	# 	else
-	# 		redirect_to "/users/new"
-	# 	end
-	# end
-	
+	before_action :set_current_user
+
+	def  set_current_user
+		@current_user = session[:user_id]
+	end
+
 end

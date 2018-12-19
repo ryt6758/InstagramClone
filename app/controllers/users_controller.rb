@@ -13,4 +13,22 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def login_form
+	end
+
+	def login
+		@user = User.find_by(email: params[:email], password: params[:password])
+		if @user
+			session[:user_id] = @user.id
+			flash[:sucsess] = "ログインしました"
+			redirect_to "/"
+		end
+	end
+
+	def logout
+		session[:user_id] = nil
+		flash[:success] = "ログアウトしました"
+		redirect_to "/login_form"
+	end
+
 end
