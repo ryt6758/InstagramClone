@@ -1,3 +1,13 @@
 <% if @post.image.attached? %>
   <%= image_tag @post.image %>
+  <p><%= @post.content %></p>
+<% end %>
+
+<% @comments.each do |comment| %>
+	<p><%= comment.content %> / <%= comment.user.name %> - <%= comment.created_at %></p>
+<% end %>
+
+<%= form_with model: Comment.new, url: "/posts/#{params[:id]}/comment", local: true do |form| %>
+	<p><%= form.text_field :content %></p>
+	<%= form.submit value: "投稿" %>
 <% end %>

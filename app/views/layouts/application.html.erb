@@ -11,8 +11,8 @@
 
   <body>
     <ul>
+      <li><%= link_to("InstaClone", "/") %></li>
       <% if @current_user %>
-        <li><%= link_to("InstaClone", "/") %></li>
         <li><%= link_to("新規投稿", "/posts/new") %></li>
         <li><%= link_to("ログアウト", "/logout", method: "post") %></li>
       <% else %>

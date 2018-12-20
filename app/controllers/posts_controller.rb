@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.create params.require(:post).permit(:content, :image)
-		@post.user_id = @current_user
+		@post.user_id = @current_user.id
 		if @post.save
 			flash[:secsess] = "投稿しました"
 			redirect_to "/"
@@ -21,10 +21,14 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find_by(id: params[:id])
+		@comments = Comment.where(post_id: params[:id])
 	end
 
 	def login_check
-		redirect_to "/login_form" unless @current_user
+		if !@current_user
+			flash[:sucsess] = "ログインまたは会員登録をしてください"
+			redirect_to "/login_form"
+		end
 	end
 
 end

@@ -11,9 +11,12 @@ Rails.application.routes.draw do
   get "posts/new" => "posts#new"
   post "posts/create" => "posts#create"
   get "posts/:id" => "posts#show"
+  post "posts/:id/comment" => "comments#write"
 
   get "login_form" => "users#login_form"
   post "login" => "users#login"
   post "logout" => "users#logout"
+
+
 
 end

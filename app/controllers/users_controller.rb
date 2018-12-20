@@ -5,11 +5,14 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.create params.require(:user).permit(:email, :password, :name)
-		if @user
+		@user = User.new params.require(:user).permit(:email, :password, :name)
+		if @user.save
 			session[:user_id] = @user.id
 			flash[:sucsess] = "保存に成功しました"
 			redirect_to "/users/new"
+		else
+			flash[:sucsess] = "正しい値を入力してください"
+			render "users/new"
 		end
 	end
 
@@ -22,6 +25,9 @@ class UsersController < ApplicationController
 			session[:user_id] = @user.id
 			flash[:sucsess] = "ログインしました"
 			redirect_to "/"
+		else
+			flash[:sucsess] = "メールアドレスまたはパスワードが違います"
+			render 'login_form'
 		end
 	end
 
