@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 			redirect_to "/posts/#{params[:id]}"
 		else
 			flash[:sucsess] = "コメントを入力してください"
-			render "/posts/params[:id]"
+			redirect_to posts_new_path(1)
 		end
 	end
 
