@@ -8,15 +8,17 @@ Rails.application.routes.draw do
   get "users/:id" => "users#show"
   post "users/create" => "users#create"
 
-  get "posts/new" => "posts#new"
   get "posts/:id" => "posts#show"
+  get "posts/new" => "posts#new"
   post "posts/create" => "posts#create"
-  post "posts/:id/comment" => "comments#write"
+
+  post "comments/:id/create" => "comments#create"
+  post "likes/:post_id/create" => "likes#create"
+  post "likes/:post_id/destroy" => "likes#destroy"
 
   get "login_form" => "users#login_form"
   post "login" => "users#login"
   post "logout" => "users#logout"
-
 
 
 end

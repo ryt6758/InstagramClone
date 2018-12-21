@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-	def write
+	def create
 		@comment = Comment.new params.require(:comment).permit(:content)
 		@comment.user_id = @current_user.id
 		@comment.post_id = params[:id]
@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 			redirect_to "/posts/#{params[:id]}"
 		else
 			flash[:sucsess] = "コメントを入力してください"
-			redirect_to posts_new_path(1)
+			redirect_to "/"
 		end
 	end
 
