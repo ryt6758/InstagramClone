@@ -6,5 +6,8 @@
   <% if post.image.attached? %>
 	<%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
   <% end %>
-  <p><%= post.content %> - <%= post.created_at %></p>
+  <p>
+  	<%= link_to post.content, "/posts/#{post.id}" %> / 
+  	<%= link_to post.user.name, "/users/#{post.user.id}" %> - 
+  	<%= post.created_at %></p>
 <% end %>

@@ -1,5 +1,7 @@
 class LikesController < ApplicationController
 
+	before_action :login_check
+
 	def create
 	    @like = Like.create(user_id: @current_user.id, post_id: params[:post_id])
 	    redirect_to "/posts/#{params[:post_id]}"

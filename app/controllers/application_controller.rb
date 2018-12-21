@@ -6,4 +6,11 @@ class ApplicationController < ActionController::Base
 		@current_user = User.find_by(id: session[:user_id])
 	end
 
+	def login_check
+		if @current_user == nil
+			flash[:sucsess] = "ログインまたは会員登録をしてください"
+			redirect_to "/login_form"
+		end
+	end
+
 end

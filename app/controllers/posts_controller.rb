@@ -25,11 +25,4 @@ class PostsController < ApplicationController
 		@like_count = Like.where(post_id: params[:id]).count
 	end
 
-	def login_check
-		if !@current_user
-			flash[:sucsess] = "ログインまたは会員登録をしてください"
-			redirect_to "/login_form"
-		end
-	end
-
 end
