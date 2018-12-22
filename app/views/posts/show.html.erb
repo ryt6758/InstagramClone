@@ -1,8 +1,8 @@
 <% if @post.image.attached? %>
   <%= image_tag @post.image %>
-  <% if @post.content %>
-  	<p><%= @post.content %></p>
-  <% end %>
+<% end %>
+<% if @post.content %>
+  <p><%= @post.content %></p>
 <% end %>
 
 <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
