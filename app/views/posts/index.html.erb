@@ -1,7 +1,7 @@
 <% if flash[:sucsess] %>
   <%= flash[:sucsess] %>
 <% end %>
-
+<% if false %>
 <% @posts.each do |post| %>
   <% if post.image.attached? %>
 	<%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
@@ -14,4 +14,5 @@
   	  <%= link_to post.user.name, "/users/#{post.user.id}" %> - 
   	<% end %>
   	<%= post.created_at %></p>
+<% end %>
 <% end %>
