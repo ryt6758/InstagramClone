@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   post "users/:id/follow/create" => "follows#create"
   post "users/:id/follow/destroy" => "follows#destroy"
 
-  get "posts/:id" => "posts#show"
   get "posts/new" => "posts#new"
+  get "posts/:id" => "posts#show"
   post "posts/create" => "posts#create"
 
   get "login_form" => "users#login_form"
