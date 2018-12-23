@@ -4,6 +4,7 @@
   <%= flash[:sucsess] %>
 <% end %>
 
+<%# このあたり、　formを適切にマークアップ（pタグなど）すると、brを使わずにすみそうです。brは多様しないほうが良いです。 %>
 <%= form_with model: @user, url: users_create_url, local: true  do |form| %>
   <%= form.label :email %><br>
   <%= form.email_field :email %><br>

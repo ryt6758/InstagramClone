@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 			flash[:sucsess] = "コメントを投稿しました"
 			redirect_to "/posts/#{params[:post_id]}"
 		else
+			# flashにメッセージを入れるのは良いが、ここはfailなどのkeyが望ましい（処理に失敗しているので）
 			flash[:sucsess] = "コメントを入力してください"
 			redirect_to "/posts/#{params[:post_id]}"
 		end
@@ -17,6 +18,8 @@ class CommentsController < ApplicationController
 
 	def destroy
 		@comment = Comment.find(params[:comment_id])
+
+		# より厳密に処理するのであれば、destroyもcreate同様に成功・失敗の判定をいれるべき
 		@comment.destroy
 		redirect_to "/posts/#{params[:id]}"
 	end

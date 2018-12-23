@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+	# exceptよりもonlyを使うほうが良いです。
+	# exceptは◯◯以外という意味なので、メソッドを追加したときに誤爆しやすいため
 	before_action :login_check, except: :index
 
 	def index
