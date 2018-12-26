@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 	before_action :login_check, except: :index
 
 	def index
-		@posts = Post.all.order(created_at: "DESC")
+    @posts = Post.all.order(created_at: "DESC")
 	end
 
 	def new
