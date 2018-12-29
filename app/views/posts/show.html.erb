@@ -6,25 +6,28 @@
 <% end %>
 
 <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
-	<p><%= link_to("unGood!!", "/posts/#{@post.id}/likes/#{@post.id}/destroy", method: "post") %> / <%= @like_count %></p>
+  <p><%= link_to("unGood!!", "/posts/#{@post.id}/likes/#{@post.id}/destroy", method: "post") %> / <%= @like_count %></p>
 <% else %>
-	<p><%= link_to("Good!!", "/posts/#{@post.id}/likes/#{@post.id}/create", method: "post") %> / <%= @like_count %></p>
+  <p><%= link_to("Good!!", "/posts/#{@post.id}/likes/#{@post.id}/create", method: "post") %> / <%= @like_count %></p>
 <% end %>
 
 <% @comments.each do |comment| %>
-	<p>
-		<%= comment.content %> / 
-		<%= link_to(comment.user.name, "/users/#{comment.user.id}") %> - 
-		<%= comment.created_at %>　
-		<% if comment.user_id == @current_user.id %>
-			<%= link_to("削除", "/posts/#{@post.id}/comments/#{comment.id}/destroy", method: "post") %>
-		<% end %>
-	 </p>
+  <p>
+    <%= comment.content %> /
+    <%= link_to(comment.user.name, "/users/#{comment.user.id}") %> -
+    <%= comment.created_at %>
+    <% if comment.user_id == @current_user.id %>
+      <%= link_to("削除", "/posts/#{@post.id}/comments/#{comment.id}/destroy", method: "post") %>
+    <% end %>
+   </p>
 <% end %>
 <% if flash[:sucsess] %>
-	<%= flash[:sucsess] %>
+  <%= flash[:sucsess] %>
+<% end %>
+<% if flash[:fail] %>
+  <%= flash[:fail] %>
 <% end %>
 <%= form_with model: Comment.new, url: "/posts/#{@post.id}/comments/#{@post.id}/create", local: true do |form| %>
-	<p><%= form.text_field :content %></p>
-	<%= form.submit value: "投稿" %>
+  <p><%= form.text_field :content %></p>
+  <%= form.submit value: "投稿" %>
 <% end %>

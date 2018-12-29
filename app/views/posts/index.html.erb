@@ -4,15 +4,15 @@
 <% if false %>
 <% @posts.each do |post| %>
   <% if post.image.attached? %>
-	<%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
+  <%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
   <% end %>
   <p>
-  	<%= link_to post.content, "/posts/#{post.id}" %> / 
-  	<% if @current_user.id == post.user.id %>
-  	  <%= post.user.name %>
-  	<% else %>
-  	  <%= link_to post.user.name, "/users/#{post.user.id}" %> - 
-  	<% end %>
-  	<%= post.created_at %></p>
+    <%= link_to post.content, "/posts/#{post.id}" %> /
+    <% if @current_user.id == post.user.id %>
+      <%= post.user.name %>
+    <% else %>
+      <%= link_to post.user.name, "/users/#{post.user.id}" %> -
+    <% end %>
+    <%= post.created_at %></p>
 <% end %>
 <% end %>
