@@ -24,5 +24,4 @@ Rails.application.routes.draw do
   get "login_form" => "users#login_form"
   post "login" => "users#login"
   post "logout" => "users#logout"
-
 end

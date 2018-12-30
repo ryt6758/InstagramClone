@@ -5,6 +5,12 @@
   <p><%= @post.content %></p>
 <% end %>
 
+<% if @tags %>
+  <% @tags.each do |tag| %>
+    <p><%= tag.content %></p>
+  <% end %>
+<% end %>
+
 <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
   <p><%= link_to("unGood!!", "/posts/#{@post.id}/likes/#{@post.id}/destroy", method: "post") %> / <%= @like_count %></p>
 <% else %>
