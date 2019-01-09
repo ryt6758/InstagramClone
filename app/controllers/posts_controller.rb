@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_user, only: [:new, :create, :show]
+  before_action :authenticate_user
   before_action :set_following_users, only: [:index]
 
   def index

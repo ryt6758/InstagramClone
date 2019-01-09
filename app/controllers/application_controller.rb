@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_following_users
-    @following_users = @current_user.followings
+      @following_users = @current_user.followings
   end
 
   def authenticate_user
