@@ -1,7 +1,7 @@
 <% if flash[:sucsess] %>
   <%= flash[:sucsess] %>
 <% end %>
-
+<div class="icons_1x-icon-good"></div>
 <% @posts.each do |post| %>
   <% if post.image.attached? %>
     <%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
