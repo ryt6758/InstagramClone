@@ -1,0 +1,24 @@
+@mixin button_skelton($color){
+  width: 300px;
+  height: 100px;
+  background-color: $color;
+}
+
+@mixin background-sprite($sprite-path, $image-name, $sprite-path-retina, $image-name-retina) {
+  // image-widthで結合前の画像の横幅を取得
+  width: image-width(sprite-file($sprite-path, $image-name));
+  // image-heightで結合前の画像の高さを取得
+  height: image-height(sprite-file($sprite-path, $image-name));
+  background-image: $sprite-path;
+  // 表示する位置を指定
+  background-position: sprite-position($sprite-path, $image-name);
+  background-repeat: no-repeat;
+  // Retina用指定
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    width: image-width(sprite-file($sprite-path-retina, $image-name-retina)) / 2;
+    height: image-height(sprite-file($sprite-path-retina, $image-name-retina)) / 2;
+    background-image: $sprite-path-retina;
+    background-position: sprite-position($sprite-path-retina, $image-name-retina) / 2;
+    background-size: (image-width(sprite-path($sprite-path-retina)) / 2) auto;
+  }
+}

@@ -1,2 +1,4 @@
-$icons_1x-sprite-dimensions: true;
-$icons_2x-sprite-dimensions: true;
+// sprite-mapで結合後の画像を呼び出せる
+$sprite-image: sprite-map("icons_1x/*.png");
+// Retina用
+$sprite-image-2x: sprite-map("icons_2x/*.png");

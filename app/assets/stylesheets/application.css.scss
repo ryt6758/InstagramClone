@@ -24,11 +24,7 @@
 @include all-icons_1x-sprites;
 @include all-icons_2x-sprites;
 @import "mixins";
+
 @import "partial/header";
 @import "partial/sidebar";
 @import "partial/footer";
-
-.icons_1x-icon-logo-name {
-  width: image-width("icons_1x/icon-logo-name.png");
-  height: image-height("icons_1x/icon-logo-name.png");
-}

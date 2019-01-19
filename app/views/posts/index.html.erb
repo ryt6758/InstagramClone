@@ -1,8 +1,9 @@
 <% if flash[:sucsess] %>
   <%= flash[:sucsess] %>
 <% end %>
-<div class="icons_1x-icon-good"></div>
-<% @posts.each do |post| %>
+
+<div class="posts-wrap">
+  <% @posts.each do |post| %>
   <% if post.image.attached? %>
     <%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
   <% end %>
@@ -16,3 +17,9 @@
     <%= post.created_at %>
   </p>
 <% end %>
+</div>
+
+<div class="red-button">button</div>
+<div class="yellow-button">button</div>
+
+<div class="test"></div>

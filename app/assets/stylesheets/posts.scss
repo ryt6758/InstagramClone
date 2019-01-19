@@ -1,3 +1,29 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins";
+@import "variables";
+
+@mixin set_background_color($color){
+  background-color: $color;
+}
+
+.posts-wrap {
+  @include set_background_color(#ff0);
+  // background-color: #f00;
+}
+
+.red-button {
+  @include button_skelton(#f0f);
+  width: 400px;
+}
+
+.yellow-button {
+  @include button_skelton(#ff0);
+  height: 300px;
+}
+
+.test {
+  @include background-sprite($sprite-image, "icon-good", $sprite-image-2x, "icon-good");
+}
