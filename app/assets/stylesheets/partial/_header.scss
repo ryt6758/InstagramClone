@@ -1,0 +1,59 @@
+@import "variables";
+@import "mixins";
+
+.navWrap {
+  width: 100%;
+  height: 77px;
+  border-bottom: 1px solid #262626;
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+}
+.navgation {
+  @include flex-box;
+  width: 100%;
+  max-width: 1010px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 26px 20px;
+}
+.logos {
+  @include flex-box;
+  @include flex-item;
+  justify-content: flex-start;
+  // background-color: #faf;
+  &__logo {
+    @include background-sprite($sprite-image, "ico_logo", $sprite-image-2x, "ico_logo@2x");
+  }
+  &__name {
+    @include background-sprite($sprite-image, "ico_logo_name", $sprite-image-2x, "ico_logo_name@2x");
+  }
+  &__verticalLine{
+    background-color: #262626;
+    height: 28px;
+    margin: 0 16px;
+    width: 1px;
+  }
+}
+.serchBox {
+  @include flex-item;
+  // background-color: #ef1;
+  text-align: center;
+  // &__input {
+
+  // }
+}
+.aboutMe {
+  @include flex-box;
+  @include flex-item;
+  justify-content: flex-end;
+  // background-color: #abc;
+  &__newPost {
+    @include background-sprite($sprite-image, "ico_comment", $sprite-image-2x, "ico_comment@2x");
+    margin-right: 10px;
+  }
+  &__myPage {
+    @include background-sprite($sprite-image, "ico_mypage", $sprite-image-2x, "ico_mypage@2x");
+    margin-left: 10px;
+  }
+}

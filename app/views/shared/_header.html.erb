@@ -1,3 +1,22 @@
+<nav>
+  <div class="navWrap">
+    <div class="navgation">
+      <div class="logos">
+        <%= link_to("", "", class: "logos__logo") %>
+        <div class="logos__verticalLine"></div>
+        <%= link_to("", "", class: "logos__name") %>
+      </div>
+      <div class="serchBox">
+        <input type="text" class="serchBox__input">
+      </div>
+      <div class="aboutMe">
+        <%= link_to("", "", class: "aboutMe__newPost") %>
+        <%= link_to("", "", class: "aboutMe__myPage") %>
+      </div>
+    </div>
+  </div>
+</nav>
+<% if false %>
 <ul>
   <li><%= link_to("InstaClone", "/") %></li>
   <% if @current_user %>
@@ -8,3 +27,4 @@
     <li><%= link_to("ログイン", "/login_form") %></li>
   <% end %>
 </ul>
+<% end %>

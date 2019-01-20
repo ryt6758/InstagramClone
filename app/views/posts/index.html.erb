@@ -2,7 +2,7 @@
   <%= flash[:sucsess] %>
 <% end %>
 
-<div class="posts-wrap">
+<div class="postsWrap">
   <% @posts.each do |post| %>
   <% if post.image.attached? %>
     <%= link_to(image_tag(post.image), "/posts/#{post.id}") %>
@@ -18,8 +18,3 @@
   </p>
 <% end %>
 </div>
-
-<div class="red-button">button</div>
-<div class="yellow-button">button</div>
-
-<div class="test"></div>
