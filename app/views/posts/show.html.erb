@@ -1,5 +1,5 @@
 <% if @post.image.attached? %>
-  <%= image_tag @post.image %>
+  <%= image_tag @post.image, id: "js-post-image" %>
 <% end %>
 <% if @post.content %>
   <p><%= @post.content %></p>
@@ -10,6 +10,9 @@
     <p><%= tag.content %></p>
   <% end %>
 <% end %>
+
+<p id="js-good-button">Good</p>
+<p id="js-good-count">0</p>
 
 <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
   <p><%= link_to("unGood!!", "/posts/#{@post.id}/likes/#{@post.id}/destroy", method: "post") %> / <%= @like_count %></p>
