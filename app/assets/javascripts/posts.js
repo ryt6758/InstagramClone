@@ -16,6 +16,33 @@ Posts.prototype.countUp = function () {
   currentCount = currentCount + 1;
   // カウントを書き換える
   currentCountDOM.innerText = String(currentCount);
+
+  let postContainer = document.getElementById("js-post-container");
+  let postId = postContainer.dataset.postId;
+  let userId = postContainer.dataset.userId;
+
+  $.ajax({
+    url: `/posts/${postId}/likes/create.json`,
+    type: 'POST',
+    dataType: "json",
+    data: {
+      'user_id': userId,
+    }
+  })
+    // Ajaxリクエストが成功した時発動
+    .done((data) => {
+      console.log("success");
+      console.log(data);
+    })
+    // Ajaxリクエストが失敗した時発動
+    .fail((data) => {
+      console.log("error");
+      console.log(data);
+    })
+    // Ajaxリクエストが成功・失敗どちらでも発動
+    .always((data) => {
+
+    });
 }
 
 Posts.prototype.showProperties = function () {
@@ -30,7 +57,12 @@ Posts.prototype.init = function () {
   });
   document.getElementById(self._goodButtonId).addEventListener('click', function () {
     console.log("good");
-    self.countUp();
+    if (this.dataset.postCountable === "true") {
+      self.countUp();
+      this.dataset.postCountable = false;
+    } else {
+      this.dataset.postCountable = true;
+    }
   });
 };
 

@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   post "posts/:id/comments/:post_id/create" => "comments#create"
   post "posts/:id/comments/:comment_id/destroy" => "comments#destroy"
 
-  post "posts/:id/likes/:post_id/create" => "likes#create"
-  post "posts/:id/likes/:post_id/destroy" => "likes#destroy"
+  post "posts/:post_id/likes/create" => "likes#create"
+  post "posts/:post_id/likes/destroy" => "likes#destroy"
 
   post "users/:id/follows/create" => "follows#create"
   post "users/:id/follows/destroy" => "follows#destroy"
