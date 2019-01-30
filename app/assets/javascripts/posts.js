@@ -1,102 +1,116 @@
 var Posts = Posts || function () { };
 
-// (function () {
-Posts.prototype._imageId = "js-post-image";
+(function () {
+  Posts.prototype._imageId = "js-post-image";
 
-Posts.prototype._goodButtonId = "js-good-button";
-Posts.prototype._goodCountId = "js-good-count";
+  Posts.prototype._goodButtonId = "js-good-button";
+  Posts.prototype._goodCountId = "js-good-count";
 
-Posts.prototype.countUp = function () {
-  // // 現在のカウントを取得する
-  // let self = this;
-  // var currentCountDOM = document.getElementById(self._goodCountId);
-  // var currentCount = parseInt(currentCountDOM.innerText);
-  // console.log(currentCount);
-  // // カウントを進める
-  // currentCount = currentCount + 1;
-  // // カウントを書き換える
-  // currentCountDOM.innerText = String(currentCount);
+  Posts.prototype.countUp = function () {
+    // // 現在のカウントを取得する
+    // let self = this;
+    // var currentCountDOM = document.getElementById(self._goodCountId);
+    // var currentCount = parseInt(currentCountDOM.innerText);
+    // console.log(currentCount);
+    // // カウントを進める
+    // currentCount = currentCount + 1;
+    // // カウントを書き換える
+    // currentCountDOM.innerText = String(currentCount);
 
-  let postContainer = document.getElementById("js-post-container");
-  let postId = postContainer.dataset.postId;
-  let userId = postContainer.dataset.userId;
+    let postContainer = document.getElementById("js-post-container");
+    let postId = postContainer.dataset.postId;
+    let userId = postContainer.dataset.userId;
 
-  $.ajax({
-    url: `/posts/${postId}/likes/create`,
-    type: 'POST',
-    dataType: "json",
-    data: {
-      'user_id': userId,
-      'post_id': postId,
-    }
-  })
-    // Ajaxリクエストが成功した時発動
-    .done((data) => {
-      console.log("success");
-      console.log(data);
-      $('#js-good-count').html(data.likes_count);
+    $.ajax({
+      url: `/posts/${postId}/likes/create`,
+      type: 'POST',
+      dataType: "json",
+      data: {
+        'user_id': userId,
+        'post_id': postId,
+      }
     })
-    // Ajaxリクエストが失敗した時発動
-    .fail((data) => {
-      console.log("error");
-      console.log(data);
-    })
-    // Ajaxリクエストが成功・失敗どちらでも発動
-    .always((data) => {
+      // Ajaxリクエストが成功した時発動
+      .done((data) => {
+        console.log("success");
+        console.log(data);
+        $('#js-good-count').html(data.likes_count);
+        // info: テキストもgood → ungoodに変更するとなお良い
+      })
+      // Ajaxリクエストが失敗した時発動
+      .fail((data) => {
+        console.log("error");
+        console.log(data);
+      })
+      // Ajaxリクエストが成功・失敗どちらでも発動
+      .always((data) => {
 
+      });
+  }
+
+  Posts.prototype.countDown = function () {
+
+    let postContainer = document.getElementById("js-post-container");
+    let postId = postContainer.dataset.postId;
+    let userId = postContainer.dataset.userId;
+
+    $.ajax({
+      url: `/posts/${postId}/likes/destroy`,
+      type: 'POST',
+      dataType: "json",
+      data: {
+        'user_id': userId,
+        'post_id': postId,
+      }
+    })
+      // Ajaxリクエストが成功した時発動
+      .done((data) => {
+        console.log("success");
+        console.log(data);
+        $('#js-good-count').html(data.likes_count);
+        // info: テキストもungood → goodに変更するとなお良い
+      })
+      // Ajaxリクエストが失敗した時発動
+      .fail((data) => {
+        console.log("error");
+        console.log(data);
+      })
+      // Ajaxリクエストが成功・失敗どちらでも発動
+      .always((data) => {
+
+      });
+  }
+
+  Posts.prototype.showProperties = function () {
+    console.log("showProperties");
+  };
+
+  Posts.prototype.init = function () {
+    let self = this;
+    document.getElementById(self._goodButtonId).addEventListener('click', function () {
+      if (this.dataset.postCountable === "true") {
+        self.countUp();
+        this.dataset.postCountable = false;
+        // ステータスを逆にする、ということなので下記のようにも記述可能
+        // his.dataset.postCountable = !his.dataset.postCountable;
+      } else {
+        self.countDown();
+        this.dataset.postCountable = true;
+      }
     });
-}
+  };
 
-Posts.prototype.countDown = function () {
-
-  let postContainer = document.getElementById("js-post-container");
-  let postId = postContainer.dataset.postId;
-  let userId = postContainer.dataset.userId;
-
-  $.ajax({
-    url: `/posts/${postId}/likes/destroy`,
-    type: 'POST',
-    dataType: "json",
-    data: {
-      'user_id': userId,
-      'post_id': postId,
-    }
-  })
-    // Ajaxリクエストが成功した時発動
-    .done((data) => {
-      console.log("success");
-      console.log(data);
-      $('#js-good-count').html(data.likes_count);
-    })
-    // Ajaxリクエストが失敗した時発動
-    .fail((data) => {
-      console.log("error");
-      console.log(data);
-    })
-    // Ajaxリクエストが成功・失敗どちらでも発動
-    .always((data) => {
-
-    });
-}
-
-Posts.prototype.showProperties = function () {
-  console.log("showProperties");
-};
-
-Posts.prototype.init = function () {
-  let self = this;
-  document.getElementById(self._goodButtonId).addEventListener('click', function () {
-    if (this.dataset.postCountable === "true") {
-      self.countUp();
-      this.dataset.postCountable = false;
-    } else {
-      self.countDown();
-      this.dataset.postCountable = true;
-    }
-  });
-};
-
-// });
+}());
+// コードのまとまりをつくるために function() { /* 中身 */} という形にしています。
+// ただ、これだと下記が実行されないです。
+//
+// # initというプロパティ（中身は関数）を追加する
+// XXX（クラス名）.prototype.init = function() { }
+//
+//
+// function() {} だけですと、関数を定義しているだけなので、「実行をしないからです」
+// 実行させるために、function() {} () をつけてあげます。最後につけた()は実行するという意味です。
+// ※ なお、function() {} という記述は、無名関数といいます。 最後につけた()は、即時実行
 
 window.onload = function () {
   console.log("hello, world in onload");
