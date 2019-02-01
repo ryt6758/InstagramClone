@@ -15,8 +15,6 @@
   <p id="js-good-button" data-post-countable="true">Good</p>
   <p id="js-good-count">0</p>
 
-  <div id="js-box" data-is-opened="false"></div>
-
   <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
     <p><%= link_to("unGood!!", "/posts/#{@post.id}/likes/destroy", method: "post") %> / <%= @like_count %></p>
   <% else %>
