@@ -5,6 +5,7 @@ var Posts = Posts || function () { };
 
   Posts.prototype._goodButtonId = "js-good-button";
   Posts.prototype._goodCountId = "js-good-count";
+  Posts.prototype._commentFormId = "js-comment-form"
 
   Posts.prototype.countUp = function () {
     // // 現在のカウントを取得する
@@ -35,7 +36,7 @@ var Posts = Posts || function () { };
         console.log("success");
         console.log(data);
         $('#js-good-count').html(data.likes_count);
-        // $('#js-good-button').html("unGOOD");
+        $('#js-good-button').html("unGOOD");
       })
       // Ajaxリクエストが失敗した時発動
       .fail((data) => {
@@ -68,7 +69,7 @@ var Posts = Posts || function () { };
         console.log("success");
         console.log(data);
         $('#js-good-count').html(data.likes_count);
-        // $('#js-good-button').html("GOOD");
+        $('#js-good-button').html("GOOD");
       })
       // Ajaxリクエストが失敗した時発動
       .fail((data) => {
@@ -87,12 +88,23 @@ var Posts = Posts || function () { };
       if (this.dataset.postCountable === "true") {
         self.countUp();
         this.dataset.postCountable = false;
-        document.getElementById(self._goodButtonId).innerHTML = "unGOOD";
       } else {
         self.countDown();
         this.dataset.postCountable = true;
-        document.getElementById(self._goodButtonId).innerHTML = "GOOD";
       }
+    });
+
+    let comment = document.getElementById(self._commentFormId);
+    comment.addEventListener("ajax:success", function (e) {
+      console.log(e);
+      let json = e.detail[0];
+      let content = json.comment
+      document.getElementById("comment_content").innerHTML = "";
+      let p = document.createElement("p");
+      p.innerHTML = `${json.comment_content} /
+      <a href="/users/${json.user_id}">${json.user_name}</a> - ${json.create_date}
+      <a href="/posts/${json.comment_id}/comments/destroy" data-method="post">削除</a>`;
+      document.getElementsByClassName("comments_wrap")[0].appendChild(p);
     });
   };
 
