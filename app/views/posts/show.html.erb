@@ -32,13 +32,6 @@
       </p>
     <% end %>
   </div>
-  <% if flash[:sucsess] %>
-    <%= flash[:sucsess] %>
-  <% end %>
-  <% if flash[:fail] %>
-    <%= flash[:fail] %>
-  <% end %>
-
   <%= form_with model: Comment.new, url: "/posts/#{@post.id}/comments/create", id: "js-comment-form" do |form| %>
     <p><%= form.text_field :content %></p>
     <%= form.submit value: "投稿" %>

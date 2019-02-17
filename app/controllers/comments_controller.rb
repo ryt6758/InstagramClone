@@ -50,10 +50,18 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:comment_id])
-    if @comment.destroy
-      flash[:fail] = "コメントを削除しました"
-      redirect_to "/posts/#{params[:id]}"
+    @comment = Comment.find_by(id: params[:comment_id])
+    respond_to do |format|
+      if @comment.destroy
+        @json_response = {
+          comment_id: @comment.id
+        }
+        format.html { redirect_to "/"}
+        format.json { render :json => @json_response }
+      else
+        format.html { redirect_to "/"}
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
 	end
 

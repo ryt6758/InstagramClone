@@ -82,6 +82,50 @@ var Posts = Posts || function () { };
       });
   }
 
+  Posts.prototype.createComment = function (json) {
+    let self = this;
+    let p = document.createElement("p");
+    document.getElementById("comment_content").value = "";
+    p.innerHTML = `${json.comment_content} /
+      <a href="/users/${json.user_id}">${json.user_name}</a> - ${json.create_date}
+      <span data-method="post" data-comment-id="${json.comment_id}">削除</span>`;
+    let deleteDOMs = p.querySelectorAll("[data-comment-id]");
+    for (let i = 0; i < deleteDOMs.length; i++) {
+      deleteDOMs[i].addEventListener("click", function () {
+        self.deleteComment(this);
+        this.parentNode.remove();
+      });
+    };
+    // p.querySelector("[data-comment-id]").onclick = function () {
+    //   self.deleteComment(this);
+    //   this.parentNode.remove();
+    //   console.log(self.deleteComment);
+    // };
+    document.getElementsByClassName("comments_wrap")[0].appendChild(p);
+  }
+
+  Posts.prototype.deleteComment = function (deleteDOM) {
+    let commentId = deleteDOM.dataset.commentId;
+    $.ajax({
+      url: `/posts/${commentId}/comments/destroy`,
+      type: "POST",
+      dataType: "json",
+      data: {
+        "comment_id": commentId
+      }
+    })
+      .done((data) => {
+        console.log(data);
+      })
+      .fail((data) => {
+        console.log("error");
+        console.log(data);
+      })
+      .always((data) => {
+
+      });
+  }
+
   Posts.prototype.init = function () {
     let self = this;
     document.getElementById(self._goodButtonId).addEventListener('click', function () {
@@ -94,17 +138,9 @@ var Posts = Posts || function () { };
       }
     });
 
-    let comment = document.getElementById(self._commentFormId);
-    comment.addEventListener("ajax:success", function (e) {
-      console.log(e);
+    document.getElementById(self._commentFormId).addEventListener("ajax:success", function (e) {
       let json = e.detail[0];
-      let content = json.comment
-      document.getElementById("comment_content").innerHTML = "";
-      let p = document.createElement("p");
-      p.innerHTML = `${json.comment_content} /
-      <a href="/users/${json.user_id}">${json.user_name}</a> - ${json.create_date}
-      <a href="/posts/${json.comment_id}/comments/destroy" data-method="post">削除</a>`;
-      document.getElementsByClassName("comments_wrap")[0].appendChild(p);
+      self.createComment(json);
     });
   };
 
