@@ -49,6 +49,9 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
   database: InstagramClone_production
-  username: InstagramClone
-  password: <%= ENV['INSTAGRAMCLONE_DATABASE_PASSWORD'] %>
+  # username: root
+  # password: <%= ENV['INSTAGRAMCLONE_DATABASE_PASSWORD'] %>
