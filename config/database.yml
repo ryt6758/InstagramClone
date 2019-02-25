@@ -53,5 +53,5 @@ production:
   encoding: utf8
   pool: 5
   database: InstagramClone_production
-  # username: root
+  username: ryo
   # password: <%= ENV['INSTAGRAMCLONE_DATABASE_PASSWORD'] %>
