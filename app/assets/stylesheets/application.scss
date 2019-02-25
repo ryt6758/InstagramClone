@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+@import "reset";
+
+@import "compass";
+@import "compass/utilities/sprites";
+@import "variables";
+@import "mixins";
+
+@import "partial/header";
+@import "partial/sidebar";
+@import "partial/footer";
