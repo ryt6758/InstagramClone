@@ -1,6 +1,7 @@
 <h1>新規投稿 - newPost</h1>
-<%= form_with model: @post, url: posts_create_path, local: true do |form| %>
-	<p><%= form.text_field :content %></p>
-	<p><%= form.file_field :image %><br></p>
-	<%= form.submit %>
+<%= form_with url: posts_create_path, local: true do |form| %>
+  <p><%= form.text_field :content %></p>
+  <p><%= form.file_field :image %></p>
+  <p><%= form.text_field :tag %></p>
+  <%= form.submit %>
 <% end %>

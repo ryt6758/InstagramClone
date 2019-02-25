@@ -1,10 +1,10 @@
 <h1>ユーザー詳細</h1>
 <p>
-	Name: <%= @user.name %>
-	<% if @current_user.id == @user.id %>
-	<% elsif !Follow.find_by(user_id: @current_user.id, follower_user_id: @user.id)%>
-		<%= link_to("フォロー", "/users/#{@user.id}/follow/create", method: "psot") %>
-	<% else %>
-		<%= link_to("フォロー中", "/users/#{@user.id}/follow/destroy", method: "post") %>
-	<% end %>
+  Name: <%= @user.name %>
+  <% if @current_user.id == @user.id %>
+  <% elsif !Follow.find_by(user_id: @current_user.id, followed_user_id: @user.id)%>
+    <%= link_to("フォロー", "/users/#{@user.id}/follows/create", method: "psot") %>
+  <% else %>
+    <%= link_to("フォロー中", "/users/#{@user.id}/follows/destroy", method: "post") %>
+  <% end %>
 </p>
